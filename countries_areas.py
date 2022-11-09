@@ -54,3 +54,76 @@ df_countries_areas = df_countries_areas.drop(columns=['#'])
 
 # Ver DataFrame
 df_countries_areas
+
+
+### **Obteniendo Dataset con las subregiones de los paises del mundo**
+
+#Enlaces con las tablas de los paises por subregión continental
+urls_subregs_by_continents = [
+    "https://www.worldometers.info/geography/how-many-countries-in-africa/",
+    "https://www.worldometers.info/geography/how-many-countries-in-asia/",
+    "https://www.worldometers.info/geography/how-many-countries-in-europe/",
+    "https://www.worldometers.info/geography/how-many-countries-in-latin-america/",
+    "https://www.worldometers.info/geography/how-many-countries-in-oceania/",
+    "https://www.worldometers.info/geography/how-many-countries-in-northern-america/"]
+
+#Obteniendo la tabla (scraping)
+class TableScraper_subregs_by_continents:
+    results = []
+
+    def fetch(self, url):
+      return requests.get(url)
+
+    def parse(self, html):
+      content = BeautifulSoup(html, 'lxml')
+      table = content.find('div', class_='table-responsive')
+      rows = table.findAll('tr')
+      self.results.append([header.text for header in rows[0].findAll('th')])
+      
+      for row in rows:
+        if len(row.findAll('td')):
+          self.results.append([data.text for data in row.findAll('td')])
+   
+    def to_csv(self):
+        with open('subregs_by_continents.csv', 'w') as csv_file:
+            writer = csv.writer(csv_file)
+            writer.writerows(self.results)
+   
+    def run(self):
+      for url in urls_subregs_by_continents:
+        response = self.fetch(url)
+        self.parse(response.text)
+        self.to_csv()
+
+if __name__ == '__main__':
+    scraper = TableScraper_subregs_by_continents()
+    scraper.run()
+
+#Comprobar subregs_by_continents.csv
+pd.read_csv('subregs_by_continents.csv')
+
+#Convirtiendo subregs_by_continents.csv a DataFrame
+df_subregs_by_continents = pd.DataFrame(pd.read_csv('subregs_by_continents.csv'))
+
+#Comprobar DataFrame
+df_subregs_by_continents
+
+#Eliminando índice duplicado
+df_subregs_by_continents = df_subregs_by_continents.drop(columns = ['#'])
+
+#Comprobar eliminación de índice duplicado
+df_subregs_by_continents
+
+#Eliminando las cabeceras duplicadas de las tablas extraidas
+df_subregs_by_continents = df_subregs_by_continents.drop_duplicates()
+
+#Comprobar eliminación de cabeceras duplicadas
+df_subregs_by_continents
+
+#Eliminar 54va fila correspondiente a cabecera remanente
+df_subregs_by_continents = df_subregs_by_continents.drop(54)
+
+#Ver DataFrame
+df_subregs_by_continents
+
+
