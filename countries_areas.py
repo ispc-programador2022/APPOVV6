@@ -126,4 +126,28 @@ df_subregs_by_continents = df_subregs_by_continents.drop(54)
 #Ver DataFrame
 df_subregs_by_continents
 
+### **Fusionando y limpiando los DataFrames**
 
+#Fusionando
+merged_countries_table = pd.merge(df_countries_areas, df_subregs_by_continents, 'outer', 'Country')
+
+#Comprobar fusión
+merged_countries_table
+
+#Renombrando columna de población
+renamed_merged_table = merged_countries_table.rename(columns = {'Population(2020)_x': 'Population (2020)'})
+
+#Comprobar renombrado
+renamed_merged_table
+
+#Eliminando columnas de índice y población repetidas
+almost_done_table = renamed_merged_table.drop(columns =['#', 'Population(2020)_y'])
+
+#Comprobar eliminación de las columnas
+almost_done_table
+
+#Eliminando filas de cabeceras remanentes
+final_countries_table = almost_done_table.drop_duplicates()
+
+#Tabla final limpiada
+final_countries_table
