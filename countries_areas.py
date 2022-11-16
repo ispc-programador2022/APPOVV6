@@ -128,8 +128,8 @@ merged_countries_table = pd.merge(df_countries_areas, df_subregs_by_continents, 
 #Comprobar fusión
 merged_countries_table
 
-#Renombrando columna de población
-renamed_merged_table = merged_countries_table.rename(columns = {'Population(2020)_x': 'Population (2020)'})
+#Renombrando columnas
+renamed_merged_table = merged_countries_table.rename(columns = {'Population(2020)_x': 'Population_2020', 'World Share': 'World_Share', 'Land Area (Km²)': 'Land_Area_(Km²)'})
 
 #Comprobar renombrado
 renamed_merged_table
@@ -143,5 +143,5 @@ almost_done_table
 #Eliminando filas de cabeceras remanentes
 final_countries_table = almost_done_table.drop_duplicates()
 
-#Tabla final limpiada
+#Tabla final limpia
 final_countries_table
