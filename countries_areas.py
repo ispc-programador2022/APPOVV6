@@ -108,12 +108,6 @@ df_subregs_by_continents = pd.DataFrame(pd.read_csv('subregs_by_continents.csv')
 #Comprobar DataFrame
 df_subregs_by_continents
 
-#Eliminando índice duplicado
-df_subregs_by_continents = df_subregs_by_continents.drop(columns = ['#'])
-
-#Comprobar eliminación de índice duplicado
-df_subregs_by_continents
-
 #Eliminando las cabeceras duplicadas de las tablas extraidas
 df_subregs_by_continents = df_subregs_by_continents.drop_duplicates()
 
