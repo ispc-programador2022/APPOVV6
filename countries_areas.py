@@ -145,3 +145,27 @@ final_countries_table = almost_done_table.drop_duplicates()
 
 #Tabla final limpia
 final_countries_table
+
+
+#Importando librerias para manipular columnas y poder graficar
+import numpy as np
+import matplotlib.pyplot as plt
+
+#Creación de una copia del Dataset como array o lista
+countries_table_arr = np.array(final_countries_table)
+
+#Comprobando copia
+countries_table_arr
+
+#Trasposición del array para obtención de columnas
+countries_table_arr = countries_table_arr.T
+
+#Comprobando trasposición
+countries_table_arr
+
+#Obtención y asignación de columnas
+Paises = countries_table_arr[0]
+Poblacion_2020 = countries_table_arr[1]
+Porcentaje_del_Total = countries_table_arr[2]
+Superficie = countries_table_arr[3]
+Subregion = countries_table_arr[4]
