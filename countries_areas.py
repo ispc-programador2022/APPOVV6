@@ -187,14 +187,14 @@ Poblacion = np.append(Poblacion_arr_x, Poblacion_arr[-1])
 #Transformando Poblacion de tipo string Unicode ('<U10') a tipo entero ('int64')
 Poblacion = Poblacion.astype('int32')
 
-#Revisar el tipo de dato del array-columna Poblacion:
+#Revisar el tipo de dato del array Poblacion:
 Poblacion.dtype
 
 #Revisar array-columna Poblacion: ok
 Poblacion
 
 
-#Obteniendo columna Paises (['Country']) tipo objeto 'Object'
+#Obteniendo columna Paises (['Country']) tipo 'Object' ('O')
 Paises = final_countries_table['Country']
 
 #Revisar tipo de dato
@@ -207,7 +207,7 @@ Paises_str = Paises_str.split()
 #Transformando string "Paises_str" en 'array' con NumPy
 Paises_arr = np.array(Paises_str)
 
-#Comprobar transformación de tipo y eliminación de espacios vacíos
+#Comprobar transformación de tipo y eliminación de espacios vacíos en el array Paises
 Paises_arr
 
 #Comprobar cantidad de elementos de columna "Paises_arr"
@@ -219,12 +219,12 @@ num_range_arr_str = np.arange(0,195).astype('str')
 #Comprobar rango creado
 num_range_arr_str
 
-#Eliminando números de índice incluidos por defecto en el array
+#Eliminando números de índice incluidos por defecto en el array Paises
 Paises_clean = []
 Paises_clean = Paises_arr.tolist()
 for i in num_range_arr_str:
     if i in Paises_clean:
         Paises_clean.remove(i)
         
-#Comprobar array de paises limpio
+#Comprobar array de Paises limpio
 Paises_clean
