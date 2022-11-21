@@ -1,15 +1,16 @@
-#TSCDIA - Cohorte 2022#
-Proyecto Integrador - Grupo APPOVV6
+**# TSCDIA - Cohorte 2022 # <br />**
 
-Integrantes:
-·Olmedo Yanet
-·Pantaleff Maximiliano
-·Perez Jon Francis
+**Proyecto Integrador - Grupo APPOVV6** <br />
 
-Objetivo del Proyecto:
-Obtención de datos mediante técnica Scraping en Python. 
-Recolección de los mismos en archivo csv. 
-Realización de un informe sobre los datos obtenidos.
+**Integrantes:** <br />
+· Olmedo Yanet <br />
+· Pantaleff Maximiliano <br />
+· Perez Jon Francis <br />
 
-Temática elegida del Proyecto:
+**Objetivo del Proyecto:** <br />
+· Obtención de datos mediante técnica Scraping en Python. <br />
+· Recolección de los mismos en archivo csv. <br />
+· Realización de un informe sobre los datos obtenidos. <br />
+
+***Temática elegida del Proyecto:*** <br />
 Población absoluta y relativa (%) de Paises del mundo por subregión continental junto a su Superficie (2020).
