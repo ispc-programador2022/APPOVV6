@@ -147,9 +147,8 @@ final_countries_table = almost_done_table.drop_duplicates()
 final_countries_table
 
 
-#Importando librerias para manipular columnas y poder graficar
+#Importando NumPy para manipular columnas y poder graficarlas posteriormente
 import numpy as np
-import matplotlib.pyplot as plt
 
 #Creación de una copia del Dataset como array o lista
 countries_table_arr = np.array(final_countries_table)
@@ -169,3 +168,25 @@ Poblacion_2020 = countries_table_arr[1]
 Porcentaje_del_Total = countries_table_arr[2]
 Superficie = countries_table_arr[3]
 Subregion = countries_table_arr[4]
+
+
+### Obteniendo columna Población de tipo Object ('O') y transformándola a tipo string 'Unicode' ('<U10'), eliminando separador de miles "," y luego a tipo entero ('int64')
+
+#Obteniendo columna Población tipo Object ('O'), transformando a tipo string 'Unicode' ('<U10') y eliminando separador de miles ","
+Poblacion_str = final_countries_table['Population_2020'].to_string().replace(',', '')
+#Eliminando espacios vacíos
+Poblacion_str = Poblacion_str.split()
+#Transformando string "Poblacion_str" en 'array' con NumPy
+Poblacion_arr = np.array(Poblacion_str)
+#Descartando índice contenido en cada elemento del array
+Poblacion_arr_x = Poblacion_arr[1:-2:2]
+#Añadiendo Población correspondiente a la Santa Sede ('Holy See') al array, previamente excluído del rango de indexación en el paso anterior
+Poblacion = np.append(Poblacion_arr_x, Poblacion_arr[-1])
+#Transformando Poblacion de tipo string Unicode ('<U10') a tipo entero ('int64')
+Poblacion = Poblacion.astype('int32')
+
+#Revisar el tipo de dato del array-columna Poblacion:
+Poblacion.dtype
+
+#Revisar array-columna Poblacion: ok
+Poblacion
