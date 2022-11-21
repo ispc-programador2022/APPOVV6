@@ -170,6 +170,8 @@ Superficie = countries_table_arr[3]
 Subregion = countries_table_arr[4]
 
 
+### Preparación, formateo de Tipo de dato y normalización de columnas para EDA
+
 ### Obteniendo columna Población de tipo Object ('O') y transformándola a tipo string 'Unicode' ('<U10'), eliminando separador de miles "," y luego a tipo entero ('int64')
 
 #Obteniendo columna Población tipo Object ('O'), transformando a tipo string 'Unicode' ('<U10') y eliminando separador de miles ","
@@ -190,3 +192,39 @@ Poblacion.dtype
 
 #Revisar array-columna Poblacion: ok
 Poblacion
+
+
+#Obteniendo columna Paises (['Country']) tipo objeto 'Object'
+Paises = final_countries_table['Country']
+
+#Revisar tipo de dato
+Paises.dtype
+
+#Transformando columna Paises de tipo Object ('O') a array tipo string 'Unicode' ('<U10')
+Paises_str = Paises.to_string()
+#Eliminando espacios vacíos
+Paises_str = Paises_str.split()
+#Transformando string "Paises_str" en 'array' con NumPy
+Paises_arr = np.array(Paises_str)
+
+#Comprobar transformación de tipo y eliminación de espacios vacíos
+Paises_arr
+
+#Comprobar cantidad de elementos de columna "Paises_arr"
+len(Paises_arr)
+
+#Creando rango de números correspondiente a los índices a excluir del array Paises
+num_range_arr_str = np.arange(0,195).astype('str')
+
+#Comprobar rango creado
+num_range_arr_str
+
+#Eliminando números de índice incluidos por defecto en el array
+Paises_clean = []
+Paises_clean = Paises_arr.tolist()
+for i in num_range_arr_str:
+    if i in Paises_clean:
+        Paises_clean.remove(i)
+        
+#Comprobar array de paises limpio
+Paises_clean
