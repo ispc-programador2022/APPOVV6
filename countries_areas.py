@@ -147,7 +147,7 @@ final_countries_table = almost_done_table.drop_duplicates()
 final_countries_table
 
 
-#Importando NumPy para manipular columnas y poder graficarlas posteriormente
+##Importando NumPy para manipular columnas y poder graficarlas posteriormente
 import numpy as np
 
 #Creación de una copia del Dataset como array o lista
@@ -172,59 +172,121 @@ Subregion = countries_table_arr[4]
 
 ### Preparación, formateo de Tipo de dato y normalización de columnas para EDA
 
-### Obteniendo columna Población de tipo Object ('O') y transformándola a tipo string 'Unicode' ('<U10'), eliminando separador de miles "," y luego a tipo entero ('int64')
+## Obteniendo columna Population de tipo Object ('O') y transformándola a tipo integer 'Unicode' ('<U10'), eliminando separador de miles "," y luego a tipo entero ('int32')
 
-#Obteniendo columna Población tipo Object ('O'), transformando a tipo string 'Unicode' ('<U10') y eliminando separador de miles ","
-Poblacion_str = final_countries_table['Population_2020'].to_string().replace(',', '')
+#Obteniendo columna Population tipo Object ('O'), transformando a tipo string 'Unicode' ('<U10') y eliminando separador de miles ","
+Population_str = final_countries_table['Population_2020'].to_string().replace(',', '')
 #Eliminando espacios vacíos
-Poblacion_str = Poblacion_str.split()
-#Transformando string "Poblacion_str" en 'array' con NumPy
-Poblacion_arr = np.array(Poblacion_str)
+Population_str = Population_str.split()
+#Transformando string "Population_str" en 'array' con NumPy
+Population_arr = np.array(Population_str)
 #Descartando índice contenido en cada elemento del array
-Poblacion_arr_x = Poblacion_arr[1:-2:2]
-#Añadiendo Población correspondiente a la Santa Sede ('Holy See') al array, previamente excluído del rango de indexación en el paso anterior
-Poblacion = np.append(Poblacion_arr_x, Poblacion_arr[-1])
-#Transformando Poblacion de tipo string Unicode ('<U10') a tipo entero ('int64')
-Poblacion = Poblacion.astype('int32')
+Population_arr_x = Population_arr[1:-2:2]
+#Añadiendo elemento Population correspondiente a la Santa Sede ('Holy See') al array, previamente excluído del rango de indexación en el paso anterior
+Population = np.append(Population_arr_x, Population_arr[-1])
+#Transformando Poblacion de tipo string Unicode ('<U10') a tipo entero ('int32')
+Population = Population.astype('int32')
 
-#Revisar el tipo de dato del array Poblacion:
-Poblacion.dtype
+#Revisar el tipo de dato del array Population:
+Population.dtype
 
-#Revisar array-columna Poblacion: ok
-Poblacion
+#Revisar array Population: ok
+Population
 
+## Obteniendo columna Countries de tipo Object ('O') y transformándola a tipo string 'Unicode' ('<U10')
 
-#Obteniendo columna Paises (['Country']) tipo 'Object' ('O')
-Paises = final_countries_table['Country']
+#Obteniendo columna Countries (['Country']) tipo 'Object' ('O')
+Countries = final_countries_table['Country']
 
 #Revisar tipo de dato
-Paises.dtype
+Countries.dtype
 
-#Transformando columna Paises de tipo Object ('O') a array tipo string 'Unicode' ('<U10')
-Paises_str = Paises.to_string()
+#Transformando columna Countries de tipo Object ('O') a array tipo string 'Unicode' ('<U10')
+Countries_str = Countries.to_string()
 #Eliminando espacios vacíos
-Paises_str = Paises_str.split()
+Countries_str = Countries_str.split()
 #Transformando string "Paises_str" en 'array' con NumPy
-Paises_arr = np.array(Paises_str)
+Countries_arr = np.array(Countries_str)
 
-#Comprobar transformación de tipo y eliminación de espacios vacíos en el array Paises
-Paises_arr
+#Comprobar transformación de tipo y eliminación de espacios vacíos en el array Countries_arr
+Countries_arr
 
-#Comprobar cantidad de elementos de columna "Paises_arr"
-len(Paises_arr)
+#Comprobar cantidad de elementos de columna "Countries_arr"
+len(Countries_arr)
 
-#Creando rango de números correspondiente a los índices a excluir del array Paises
+#Creando rango de números correspondiente a los índices a excluir del array Countries_arr
 num_range_arr_str = np.arange(0,195).astype('str')
 
 #Comprobar rango creado
 num_range_arr_str
 
-#Eliminando números de índice incluidos por defecto en el array Paises
-Paises_clean = []
-Paises_clean = Paises_arr.tolist()
+#Eliminando números de índice incluidos por defecto en el array Countries_arr y pasando el mismo a una lista Countries_list
+Countries_list = []
+Countries_list = Countries_arr.tolist()
 for i in num_range_arr_str:
-    if i in Paises_clean:
-        Paises_clean.remove(i)
+    if i in Countries_list:
+        Countries_list.remove(i)
         
-#Comprobar array de Paises limpio
-Paises_clean
+#Comprobar lista Countries limpia
+Countries_list
+
+#Creando lista de nombres compuestos a eliminar
+to_clean = ["States", "Congo", "Kingdom", "Africa", "Korea", "Arabia", "d'Ivoire", "Korea" "Lanka", "Faso", "Sudan", "Republic", "Republic", "(Czechia)", 
+            "Arab", "Emirates", "New", "Guinea" "Leone", "Salvador", "of", "Palestine", "Rica", "African", "Republic", "Zealand", "and", "Herzegovina", 
+            "Macedonia", "Guinea", "and", "Tobago", "Islands", "Verde", "Tome", "&", "Principe", "Lucia", "Vincent", "&", "Granadines", "and", "Barbuda", 
+            "Islands", "Kitts", "&", "Nevis", "Marino", "See"]
+
+#Definiendo función que elimina los nombres compuestos
+Countries_clean = Countries_list
+def cleaning(Countries_clean):
+  for i in to_clean:
+    if i in Countries_clean:
+      Countries_clean.remove(i)
+
+#Aplicando dos veces función de limpieza de nombres compuestos debido a "Guinea" repetido
+cleaning(Countries_clean)
+cleaning(Countries_clean)
+
+#Comprobar limpieza de nombres compuestos
+Countries_clean
+
+#Renombrando Countries de nombre compuesto
+Countries = Countries_clean
+Countries[2] = "United States"
+Countries[15] = "DR Congo"
+Countries[20] = "United Kingdom"
+Countries[24] = "South Africa"
+Countries[27] = "South Korea"
+Countries[40] = "Saudi Arabia"
+Countries[52] = "Côte d'Ivoire"
+Countries[53] = "North Korea"
+Countries[56] = "Sri Lanka"
+Countries[57] = "Burkina Faso"
+Countries[82] = "South Sudan"
+Countries[83] = "Dominican Republic"
+Countries[84] = "Czech Republic (Czechia)"
+Countries[91] = "United Arab Emirates"
+Countries[96] = "Papua New Guinea"
+Countries[101] = "Sierra Leone"
+Countries[109] = "El Salvador"
+Countries[118] = "State of Palestine"
+Countries[119] = "Costa Rica"
+Countries[122] = "Central African Republic"
+Countries[123] = "New Zealand"
+Countries[132] = "Bosnia and Herzegovina"
+Countries[144] = "North Macedonia"
+Countries[149] = "Equatorial Guinea"
+Countries[150] = "Trinidad and Tobago"
+Countries[161] = "Solomon Islands"
+Countries[165] = "Cabo Verde"
+Countries[175] = "Sao Tome & Principe"
+Countries[177] = "Saint Lucia"
+Countries[180] = "St. Vincent & Grenadines"
+Countries[183] = "Antigua and Barbuda"
+Countries[186] = "Marshall Islands"
+Countries[187] = "Saint Kitts & Nevis"
+Countries[190] = "San Marino"
+Countries[194] = "Holy See"
+
+#Comprobar lista Countries
+Countries
