@@ -1,12 +1,12 @@
-### **Obteniendo Dataset de paises del mundo con su población y superficie**
+### **Obteniendo Dataset de Países del mundo con su Población y Superficie**
 
-# importando librerias
+# Importando librerías
 from bs4 import BeautifulSoup
 import requests
 import csv
 import pandas as pd
 
-# Enlace con la tabla de todos los paises del mundo con su población y superficie
+# Enlace con la tabla de todos los Países del mundo con su Población y Superficie
 url_countries_areas = 'https://www.worldometers.info/geography/how-many-countries-are-there-in-the-world/'
 
 # Obteniendo la tabla (scraping)
@@ -40,25 +40,25 @@ if __name__ == '__main__':
     scraper = TableScraper_areas()
     scraper.run()
 
-# Comprobar countries_areas.csv
+# Revisar countries_areas.csv
 pd.read_csv('countries_areas.csv')
 
-# countries_areas.csv a DataFrame
+# Convirtiendo countries_areas.csv a DataFrame
 df_countries_areas = pd.DataFrame(pd.read_csv('countries_areas.csv'))
 
-# Comprobar DataFrame
+# Revisar DataFrame de Superficie
 df_countries_areas
 
 # Eliminando índice duplicado
 df_countries_areas = df_countries_areas.drop(columns=['#'])
 
-# Ver DataFrame
+# Revisar DataFrame de Superficie
 df_countries_areas
 
 
-### **Obteniendo Dataset con las subregiones de los paises del mundo**
+### **Obteniendo Dataset con las Subregiones continentales de los Países del mundo**
 
-# Enlaces con las tablas de los paises por subregión continental
+# Enlaces de las tablas de los Países por Subregión continental
 urls_subregs_by_continents = [
     "https://www.worldometers.info/geography/how-many-countries-in-africa/",
     "https://www.worldometers.info/geography/how-many-countries-in-asia/",
@@ -67,7 +67,7 @@ urls_subregs_by_continents = [
     "https://www.worldometers.info/geography/how-many-countries-in-oceania/",
     "https://www.worldometers.info/geography/how-many-countries-in-northern-america/"]
 
-# Obteniendo la tabla (scraping)
+# Obteniendo tabla de Países por Subregión continental (scraping)
 class TableScraper_subregs_by_continents:
     results = []
 
@@ -99,67 +99,68 @@ if __name__ == '__main__':
     scraper = TableScraper_subregs_by_continents()
     scraper.run()
 
-# Comprobar subregs_by_continents.csv
+# Revisar archivo subregs_by_continents.csv
 pd.read_csv('subregs_by_continents.csv')
 
 # Convirtiendo subregs_by_continents.csv a DataFrame
 df_subregs_by_continents = pd.DataFrame(pd.read_csv('subregs_by_continents.csv'))
 
-# Comprobar DataFrame
+# Revisar DataFrame de Países por Subregión continental
 df_subregs_by_continents
 
-# Eliminando las cabeceras duplicadas de las tablas extraidas
+# Eliminando las cabeceras duplicadas de las tablas extraídas
 df_subregs_by_continents = df_subregs_by_continents.drop_duplicates()
 
-# Comprobar eliminación de cabeceras duplicadas
+# Revisar eliminación de cabeceras duplicadas
 df_subregs_by_continents
 
 # Eliminar 54va fila correspondiente a cabecera remanente
 df_subregs_by_continents = df_subregs_by_continents.drop(54)
 
-#Ver DataFrame
+# Revisar DataFrame de Países por Subregión continental
 df_subregs_by_continents
+
 
 ### **Fusionando y limpiando los DataFrames**
 
-# Fusionando
+# Fusionando datasets
 merged_countries_table = pd.merge(df_countries_areas, df_subregs_by_continents, 'outer', 'Country')
 
-# Comprobar fusión
+# Revisar fusión de datasets
 merged_countries_table
 
 # Renombrando columnas
 renamed_merged_table = merged_countries_table.rename(columns = {'Population(2020)_x': 'Population_2020', 'World Share': 'World_Share', 'Land Area (Km²)': 'Land_Area_(Km²)'})
 
-# Comprobar renombrado
+# Revisar renombrado de columnas
 renamed_merged_table
 
 # Eliminando columnas de índice y población repetidas
 almost_done_table = renamed_merged_table.drop(columns =['#', 'Population(2020)_y'])
 
-# Comprobar eliminación de las columnas
+# Revisar eliminación de las columnas
 almost_done_table
 
 # Eliminando filas de cabeceras remanentes
 final_countries_table = almost_done_table.drop_duplicates()
 
-# Tabla final limpia
+# Revisar Tabla final limpia
 final_countries_table
 
 
 ## *Importando NumPy para manipular columnas y poder graficarlas posteriormente*
 import numpy as np
 
-# Creación de una copia del Dataset como array o lista
+# Creación de una copia del Dataset como array
 countries_table_arr = np.array(final_countries_table)
 
-# Comprobar copia
+# Revisar copia del Dataset como array
 countries_table_arr
 
 # Trasposición del array para obtención de columnas
 countries_table_arr = countries_table_arr.T
 
-# Comprobar trasposición
+# Revisar trasposición
 countries_table_arr
 
 # Obtención y asignación de columnas
@@ -196,7 +197,7 @@ len(Countries_arr)
 # Creando rango de números correspondiente a los índices a excluir del array Countries_arr
 num_range_arr_str = np.arange(0,195).astype('str')
 
-# Comprobar rango creado
+# Revisar rango creado
 num_range_arr_str
 
 # Eliminando números de índice incluidos por defecto en el array Countries_arr y pasando el mismo a una lista Countries_list
@@ -206,7 +207,7 @@ for i in num_range_arr_str:
     if i in Countries_list:
         Countries_list.remove(i)
         
-# Comprobar lista Countries limpia
+# Revisar lista Countries_list limpia
 Countries_list
 
 # Creando lista de nombres compuestos a eliminar
@@ -222,7 +223,7 @@ def cleaning(Countries_clean):
     if i in Countries_clean:
       Countries_clean.remove(i)
 
-# Aplicando dos veces función de limpieza de nombres compuestos debido a "Guinea" repetido
+# Aplicando dos veces la función de limpieza de nombres compuestos debido a "Guinea" repetido
 cleaning(Countries_clean)
 cleaning(Countries_clean)
 
@@ -267,7 +268,7 @@ Countries[187] = "Saint Kitts & Nevis"
 Countries[190] = "San Marino"
 Countries[194] = "Holy See"
 
-# Comprobar lista Countries
+# Revisar lista Countries
 Countries
 
 ## *Obteniendo columna Population de tipo Object ('O') y transformándola a tipo string 'Unicode' ('<U10'), eliminando separador de miles "," y luego a tipo entero ('int32')*
