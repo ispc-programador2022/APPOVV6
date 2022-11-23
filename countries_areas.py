@@ -114,7 +114,7 @@ df_subregs_by_continents = df_subregs_by_continents.drop_duplicates()
 # Revisar eliminación de cabeceras duplicadas
 df_subregs_by_continents
 
-# Eliminar 54va fila correspondiente a cabecera remanente
+# Eliminando 54va fila correspondiente a cabecera remanente
 df_subregs_by_continents = df_subregs_by_continents.drop(54)
 
 # Revisar DataFrame de Países por Subregión continental
