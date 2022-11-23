@@ -326,6 +326,9 @@ Land_Area_Km2.dtype
 # Convirtiendo el array Land_Area_Km2 en una lista
 Land_Area_Km2.tolist()
 
+# Revisar longitud de la lista Land_Area_Km2: ok
+len(Land_Area_Km2)
+
 # Revisar lista Land_Area_Km2: ok
 Land_Area_Km2
 
