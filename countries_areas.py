@@ -382,3 +382,33 @@ Oceania
 
 # Subregiones del continente norteamericano
 Northern_America
+
+
+### EDA básico
+
+# Ver cantidad de filas x columnas del DataFrame
+final_countries_table.shape
+
+# Información general del DataFrame
+final_countries_table.info()
+
+# Descripción general del DataFrame (count, unique, top, freq)
+final_countries_table.describe()
+
+# Descripción general de Países (count, unique, top, freq)
+final_countries_table['Country'].describe()
+
+#Descripción general de Población (count, unique, top, freq)
+final_countries_table['Population_2020'].describe()
+
+# Población mínima de un país ('Holy See' - Vaticano)
+Population_2020.min()
+
+# Población máxima de un país ('China')
+Population_2020.max()
+
+# Superficie mínima de un país ('Holy See' - Vaticano)
+Land_Area_Km2.min()
+
+# Superficie máxima de un país ('Russia')
+Land_Area_Km2.max()
