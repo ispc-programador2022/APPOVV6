@@ -52,7 +52,7 @@ df_countries_areas
 # Eliminando índice duplicado
 df_countries_areas = df_countries_areas.drop(columns=['#'])
 
-# Revisar DataFrame de Superficie
+# Revisar DataFrame
 df_countries_areas
 
 
