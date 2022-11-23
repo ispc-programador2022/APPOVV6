@@ -223,12 +223,16 @@ def cleaning(Countries_clean):
     if i in Countries_clean:
       Countries_clean.remove(i)
 
-# Aplicando dos veces la función de limpieza de nombres compuestos debido a "Guinea" repetido
+# Aplicando tres veces la función de limpieza de nombres compuestos debido a "Guinea" repetido
+cleaning(Countries_clean)
 cleaning(Countries_clean)
 cleaning(Countries_clean)
 
 # Comprobar limpieza de nombres compuestos
 Countries_clean
+
+# Añadiendo a Guinea eliminado en el paso anterior en su respectivo índice
+Countries_clean_1.insert(73, 'Guinea')
 
 # Renombrando Countries de nombre compuesto
 Countries = Countries_clean
@@ -268,7 +272,10 @@ Countries[187] = "Saint Kitts & Nevis"
 Countries[190] = "San Marino"
 Countries[194] = "Holy See"
 
-# Revisar lista Countries
+# Revisar longitud de la lista Countries: ok
+len(Countries)
+
+# Revisar lista Countries: ok
 Countries
 
 ## *Obteniendo columna Population de tipo Object ('O') y transformándola a tipo string 'Unicode' ('<U10'), eliminando separador de miles "," y luego a tipo entero ('int32')*
@@ -284,16 +291,19 @@ Population_arr_x = Population_arr[1:-2:2]
 # Añadiendo elemento Population correspondiente a la Santa Sede ('Holy See') al array, previamente excluído del rango de indexación en el paso anterior
 Population = np.append(Population_arr_x, Population_arr[-1])
 # Transformando Poblacion de tipo string Unicode ('<U10') a tipo entero ('int32')
-Population = Population.astype('int32')
+Population_2020 = Population.astype('int32')
 
 # Revisar el tipo de dato del array Population:
-Population.dtype
+Population_2020.dtype
 
 # Convirtiendo el array Population en una lista
-Population.tolist()
+Population_2020.tolist()
+
+# Revisar longitud de la lista Population: ok
+len(Population_2020)
 
 # Revisar lista Population: ok
-Population
+Population_2020
 
 ## *Obteniendo columna Land_Area_Km² de tipo Object ('O') y transformándola a tipo string 'Unicode' ('<U10'), eliminando separador de miles "," y luego a tipo entero ('int32')*
 
@@ -318,3 +328,54 @@ Land_Area_Km2.tolist()
 
 # Revisar lista Land_Area_Km2: ok
 Land_Area_Km2
+
+## *Obtención de Subregiones*
+
+# Clasificando Subregion por continente al que pertenece
+Africa = []
+for subregion in final_countries_table['Subregion']:
+  if 'Africa' in subregion:
+    Africa.append(subregion)
+
+Asia = []
+for subregion in final_countries_table['Subregion']:
+  if 'Asia' in subregion:
+    Asia.append(subregion)
+
+Europe = []
+for subregion in final_countries_table['Subregion']:
+  if 'Europe' in subregion:
+    Europe.append(subregion)
+
+South_America = []
+for subregion in final_countries_table['Subregion']:
+  if 'South America' in subregion or 'Caribbean' in subregion or 'Central America' in subregion:
+    South_America.append(subregion)
+
+Oceania = []
+for subregion in final_countries_table['Subregion']:
+  if 'Melanesia' in subregion or 'Micronesia' in subregion or 'Polynesia' in subregion or 'Australia and New Zealand' in subregion:
+    Oceania.append(subregion)
+
+Northern_America = []
+for subregion in final_countries_table['Subregion']:
+  if 'Northern America' in subregion:
+    Northern_America.append(subregion)
+    
+# Subegiones del contienente africano
+Africa
+
+# Subegiones del continente asiático
+Asia
+
+# Subegiones del continente europeo
+Europe
+
+# Subegiones del continente sudamericano
+South_America
+
+# Subegiones del continente oceánico
+Oceania
+
+# Subregiones del continente norteamericano
+Northern_America
