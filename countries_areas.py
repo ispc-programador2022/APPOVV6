@@ -232,7 +232,7 @@ cleaning(Countries_clean)
 Countries_clean
 
 # Añadiendo a Guinea eliminado en el paso anterior en su respectivo índice
-Countries_clean_1.insert(73, 'Guinea')
+Countries_clean.insert(73, 'Guinea')
 
 # Renombrando Countries de nombre compuesto
 Countries = Countries_clean
