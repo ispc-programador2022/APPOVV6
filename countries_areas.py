@@ -46,7 +46,7 @@ pd.read_csv('countries_areas.csv')
 # Convirtiendo countries_areas.csv a DataFrame
 df_countries_areas = pd.DataFrame(pd.read_csv('countries_areas.csv'))
 
-# Revisar DataFrame de Superficie
+# Revisar DataFrame
 df_countries_areas
 
 # Eliminando índice duplicado
